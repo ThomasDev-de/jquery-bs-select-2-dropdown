@@ -53,15 +53,15 @@ All selects with the atrribute `[data-bs-toggle="select"]` are initialized autom
 ### Options
 ```js
 {
-  width: '100%', // the width of the dropdown button
+  btnWidth: '100%', // the width of the dropdown button
+  btnEmptyText: 'Bitte wählen..', // The text at no selection
+  btnClass: 'btn btn-outline-secondary', // The classes assigned to the dropdown button
   dropUp: false, // shows the menu above
   dropStart: false, // shows the menu on the left
   dropEnd: false, // shows the menu on the right
-  dropCenter: false, // shows the menu centered
-  buttonClass: 'btn btn-outline-secondary', // The classes assigned to the dropdown button
+  dropCenter: false, // shows the menu centered  
   search: true, // in case of multiselection, a search function is added.
   darkMenu: false, // shows the menu in darkstyle
-  emptyText: 'Bitte wählen..', // The text at no selection
   menuPreHtml: null, // shows a text in the menu before the selection
   menuAppendHtml: null // shows the text in the menu after the selection
 }
