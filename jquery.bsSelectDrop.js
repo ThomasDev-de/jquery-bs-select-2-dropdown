@@ -7,7 +7,6 @@
         }
 
         const settings = $select.data('options');
-        console.log($select.data('options'));
 
         const multiple = false !== $select.prop('multiple');
         let selectedValue = $select.val();
@@ -25,7 +24,7 @@
             class: 'dropdown js-bs-select-dropdown ' + dropClasses.join(' '),
             html: `<a class="${settings.btnClass} dropdown-toggle" ${closeOutside} href="#" role="button" data-bs-toggle="dropdown"
            aria-expanded="false" style="width:${settings.btnWidth}">
-            Dropdown link
+            ${settings.btnEmptyText}
         </a>`
         }).insertAfter($select);
 
@@ -159,7 +158,6 @@
         const $dropdown = $select.closest('.js-bs-select-dropdown');
         const $titleElement = $dropdown.find('.dropdown-toggle');
         let selectedValues = $select.val();
-        console.log(selectedValues);
         let title;
         if (!selectedValues) {
             title = settings.btnEmptyText;
