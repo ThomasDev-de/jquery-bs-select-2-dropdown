@@ -5,7 +5,7 @@ Converts a select into a dropdown
 ### Installation
 Include the script at the end of the body tag.
 ```html
-<script src="jquery-bsSelectDrop.js" type="text/javascript">
+<script src="jquery.bsSelectDrop.js" type="text/javascript">
 ```
 
 ### Requirements
