@@ -24,7 +24,7 @@
         const $dropdown = $('<div>', {
             class: 'dropdown js-bs-select-dropdown ' + dropClasses.join(' '),
             html: `<a class="${settings.buttonClass} dropdown-toggle" ${closeOutside} href="#" role="button" data-bs-toggle="dropdown"
-           aria-expanded="false">
+           aria-expanded="false" style="width:${settings.width}">
             Dropdown link
         </a>`
         }).insertAfter($select);
@@ -205,7 +205,14 @@
             $select.show();
     }
 
+    function refresh($select)
+    {
+        destroy($select, false);
+        init($select);
+    }
+
     const DEFAULTS = {
+        width: '100%',
         dropUp: false,
         dropStart: false,
         dropEnd: false,
@@ -255,8 +262,11 @@
                         break;
                     case 'updateOptions': {
                         $select.data('options', $.extend(true, $select.data('options'), param || {}, DEFAULTS));
-                        destroy($select, false);
-                        init($select);
+                        refresh($select);
+                    }
+                        break;
+                    case 'refresh': {
+                        refresh($select);
                     }
                         break;
                 }
