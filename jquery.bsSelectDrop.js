@@ -164,7 +164,6 @@
         setDropdownTitle($select);
 
         return $dropdown;
-
     }
 
     function setDropdownTitle($select) {
