@@ -10,6 +10,7 @@
 
         const multiple = false !== $select.prop('multiple');
         let selectedValue = $select.val();
+
         let closeOutside = "";
         if (multiple)
             closeOutside = `data-bs-auto-close="outside"`;
@@ -67,7 +68,18 @@
             let value = $option.prop('value');
             if (!value || value === "")
                 return;
-            let selected = value !== false && selectedValue === value ? 'active' : '';
+            let selected = "";
+            if (value !== false){
+                if (multiple)
+                {
+                    selected = $.inArray(value, selectedValue) > -1 ? 'active' : '';
+                }
+                else {
+                    selected = selectedValue === value ? 'active' : '';
+                }
+            }
+            console.log(selected);
+
             $('<div>', {
                 html: `
                 <a class="dropdown-item ${selected}" data-index="${index}" href="#">
