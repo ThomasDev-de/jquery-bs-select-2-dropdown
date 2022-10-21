@@ -26,7 +26,7 @@ Include the script at the end of the body tag.
 - jQuery 3.6
 
 ### Usage
-All selects with the atrribute `[data-bs-toggle="select"]` are initialized automatically.
+All selects with the attribute `[data-bs-toggle="select"]` are initialized automatically.
 
 **Manual call**
 ```html
@@ -53,7 +53,7 @@ All selects with the atrribute `[data-bs-toggle="select"]` are initialized autom
 ### Options
 ```js
 {
-  btnWidth: '100%', // the width of the dropdown button
+  btnWidth: 'fit-content', // the css width of the dropdown button
   btnEmptyText: 'Bitte wählen..', // The text at no selection
   btnClass: 'btn btn-outline-secondary', // The classes assigned to the dropdown button
   dropUp: false, // shows the menu above

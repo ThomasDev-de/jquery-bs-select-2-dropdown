@@ -1,7 +1,6 @@
 (function ($) {
     function init($select) {
 
-
         if ($select.closest('.dropdown').length) {
             return $select.closest('.dropdown');
         }
@@ -23,12 +22,12 @@
 
         const $dropdown = $('<div>', {
             class: 'dropdown js-bs-select-dropdown ' + dropClasses.join(' '),
-            html: `<a class="${settings.btnClass} dropdown-toggle d-flex flex-nowrap align-items-center" ${closeOutside} href="#" role="button" data-bs-toggle="dropdown"
-           aria-expanded="false" style="width:${settings.btnWidth}">
-
+            html: `
+                <a class="${settings.btnClass} dropdown-toggle d-flex flex-nowrap align-items-center" ${closeOutside} href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false" style="width:${settings.btnWidth}">
                 <div class="js-dropdown-header flex-fill text-start">${settings.btnEmptyText}</div>
 
-        </a>`
+                </a>`
         }).insertAfter($select);
 
         $select.appendTo($dropdown);
@@ -74,12 +73,10 @@
             if (!value || value === "")
                 return;
             let selected = "";
-            if (value !== false){
-                if (multiple)
-                {
+            if (value !== false) {
+                if (multiple) {
                     selected = $.inArray(value, selectedValue) > -1 ? 'active' : '';
-                }
-                else {
+                } else {
                     selected = selectedValue === value ? 'active' : '';
                 }
             }
@@ -221,14 +218,13 @@
             $select.show();
     }
 
-    function refresh($select)
-    {
+    function refresh($select) {
         destroy($select, false);
         init($select);
     }
 
     const DEFAULTS = {
-        btnWidth: '100%',
+        btnWidth: 'fit-content',
         btnEmptyText: 'Bitte wählen..',
         dropUp: false,
         dropStart: false,
