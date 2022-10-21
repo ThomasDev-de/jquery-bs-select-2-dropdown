@@ -12,6 +12,7 @@ Converts a select into a dropdown
     + [Methods](#methods)
       - [val](#val)
       - [updateOptions](#updateoptions)
+      - [refresh](#refresh)
       - [destroy](#destroy)
 
 ### Installation
