@@ -22,9 +22,11 @@
 
         const $dropdown = $('<div>', {
             class: 'dropdown js-bs-select-dropdown ' + dropClasses.join(' '),
-            html: `<a class="${settings.btnClass} dropdown-toggle" ${closeOutside} href="#" role="button" data-bs-toggle="dropdown"
+            html: `<a class="${settings.btnClass} dropdown-toggle d-flex flex-nowrap align-items-center" ${closeOutside} href="#" role="button" data-bs-toggle="dropdown"
            aria-expanded="false" style="width:${settings.btnWidth}">
-            ${settings.btnEmptyText}
+
+                <div class="js-dropdown-header flex-fill text-start">${settings.btnEmptyText}</div>
+
         </a>`
         }).insertAfter($select);
 
@@ -46,7 +48,7 @@
             }
             $(`
             <div class="d-flex px-2 pb-2 justify-content-end align-items-center border-bottom">
-            ${searchInput}
+                ${searchInput}
                 <button type="button" class="btn-close ${btnClass} ms-2" data-bs-dismiss="dropdown" aria-label="Close"></button>
             </div>
             `).appendTo($dropdownMenu);
@@ -156,7 +158,7 @@
         let settings = $select.data('options');
         const multiple = false !== $select.prop('multiple');
         const $dropdown = $select.closest('.js-bs-select-dropdown');
-        const $titleElement = $dropdown.find('.dropdown-toggle');
+        const $titleElement = $dropdown.find('.js-dropdown-header');
         let selectedValues = $select.val();
         let title;
         if (!selectedValues) {
