@@ -60,7 +60,7 @@ All selects with the atrribute `[data-bs-toggle="select"]` are initialized autom
   dropStart: false, // shows the menu on the left
   dropEnd: false, // shows the menu on the right
   dropCenter: false, // shows the menu centered  
-  search: true, // in case of multiselection, a search function is added.
+  search: true, // adds a search function to the menu
   darkMenu: false, // shows the menu in darkstyle
   menuPreHtml: null, // shows a text in the menu before the selection
   menuAppendHtml: null // shows the text in the menu after the selection
