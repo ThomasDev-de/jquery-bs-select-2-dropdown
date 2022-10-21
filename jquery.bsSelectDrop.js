@@ -78,7 +78,6 @@
                     selected = selectedValue === value ? 'active' : '';
                 }
             }
-            console.log(selected);
 
             $('<div>', {
                 html: `
