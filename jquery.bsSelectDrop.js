@@ -23,8 +23,8 @@
 
         const $dropdown = $('<div>', {
             class: 'dropdown js-bs-select-dropdown ' + dropClasses.join(' '),
-            html: `<a class="${settings.buttonClass} dropdown-toggle" ${closeOutside} href="#" role="button" data-bs-toggle="dropdown"
-           aria-expanded="false" style="width:${settings.width}">
+            html: `<a class="${settings.btnClass} dropdown-toggle" ${closeOutside} href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false" style="width:${settings.btnWidth}">
             Dropdown link
         </a>`
         }).insertAfter($select);
@@ -162,7 +162,7 @@
         console.log(selectedValues);
         let title;
         if (!selectedValues) {
-            title = settings.emptyText;
+            title = settings.btnEmptyText;
         } else {
             if (Array.isArray(selectedValues)) {
                 if (selectedValues.length === 1) {
@@ -212,15 +212,15 @@
     }
 
     const DEFAULTS = {
-        width: '100%',
+        btnWidth: '100%',
+        btnEmptyText: 'Bitte wählen..',
         dropUp: false,
         dropStart: false,
         dropEnd: false,
         dropCenter: false,
-        buttonClass: 'btn btn-outline-secondary',
+        btnClass: 'btn btn-outline-secondary',
         search: true,
         darkMenu: false,
-        emptyText: 'Bitte wählen..',
         menuPreHtml: null,
         menuAppendHtml: null
     };
