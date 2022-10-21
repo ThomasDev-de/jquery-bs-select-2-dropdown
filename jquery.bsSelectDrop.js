@@ -41,19 +41,24 @@
             class: 'dropdown-menu mt-1 ' + darkMenu
         }).appendTo($dropdown);
 
+        let searchInput = '';
+        let closeBtnClass = settings.darkMenu ? 'btn-close-white' : '';
+        let closeButton = '';
+        if (settings.search) {
+            searchInput = `<input type="search" class="form-control form-control-sm me-auto" placeholder="Suchen..">`;
+        }
+
         if (multiple) {
-            let btnClass = settings.darkMenu ? 'btn-close-white' : '';
-            let searchInput = '';
-            if (settings.search) {
-                searchInput = `<input type="search" class="form-control form-control-sm me-auto" placeholder="Suchen..">`;
-            }
-            $(`
+            closeButton = `<button type="button" class="btn-close ${closeBtnClass} ms-2" data-bs-dismiss="dropdown" aria-label="Close"></button>`;
+        }
+
+        $(`
             <div class="d-flex px-2 pb-2 justify-content-end align-items-center border-bottom">
                 ${searchInput}
-                <button type="button" class="btn-close ${btnClass} ms-2" data-bs-dismiss="dropdown" aria-label="Close"></button>
+                ${closeButton}
             </div>
             `).appendTo($dropdownMenu);
-        }
+
         if (settings.menuPreHtml !== null) {
             $('<div>', {
                 html: settings.menuPreHtml,
