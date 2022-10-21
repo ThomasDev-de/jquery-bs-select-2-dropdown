@@ -2,6 +2,18 @@
 
 Converts a select into a dropdown
 
+### table of contents
+
+- [jquery-bsSelectDrop](#jquery-bsselectdrop)
+    + [Installation](#installation)
+    + [Requirements](#requirements)
+    + [Usage](#usage)
+    + [Options](#options)
+    + [Methods](#methods)
+      - [val](#val)
+      - [updateOptions](#updateoptions)
+      - [destroy](#destroy)
+
 ### Installation
 Include the script at the end of the body tag.
 ```html
