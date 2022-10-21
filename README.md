@@ -52,6 +52,7 @@ All selects with the atrribute `[data-bs-toggle="select"]` are initialized autom
 ### Options
 ```js
 {
+  width: '100%', // the width of the dropdown button
   dropUp: false, // shows the menu above
   dropStart: false, // shows the menu on the left
   dropEnd: false, // shows the menu on the right
@@ -84,6 +85,12 @@ $('select').bsSelectDrop('updateOptions', {
   buttonClass: 'btn btn-danger',
   ...
 });
+```
+
+#### refresh
+Rebuild the dropdown. This is useful if the options are changed via Javascript.
+```js
+$('select').bsSelectDrop('refresh');
 ```
 
 #### destroy
