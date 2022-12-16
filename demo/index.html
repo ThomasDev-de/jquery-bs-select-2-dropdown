@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="../vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container">
+<h1>Demo</h1>
+<div class="mb-3">
+    <label for="singleSelect">Simple selection</label>
+    <select name="countries" id="singleSelect">
+        <option value="Germany">Deutschland</option>
+        <option value="Poland">Polen</option>
+    </select>
+</div>
+<div class="mb-3">
+    <label for="multipleSelect">Multiple selection</label>
+    <select name="cities" multiple id="multipleSelect">
+        <option value="1">Berlin</option>
+        <option value="2">New York</option>
+        <option value="4">San Francisco</option>
+    </select>
+</div>
+<div class="mb-3">
+    <label for="optGroupSelect">OptionGroups selection</label>
+    <select name="cities2" multiple id="optGroupSelect">
+        <optgroup label="Germany">
+            <option value="1">Berlin</option>
+            <option value="2">Munich</option>
+        </optgroup>
+        <optgroup label="USA">
+            <option value="3">New York</option>
+            <option value="4">San Francisco</option>
+        </optgroup>
+        <optgroup label="Spain">
+            <option value="5">Barcelona</option>
+            <option value="6">Madrid</option>
+        </optgroup>
+        <option value="7">Bitterfeld</option>
+    </select>
+</div>
+<script src="../vendor/components/jquery/jquery.min.js"></script>
+<script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../jquery.bsSelectDrop.js"></script>
+<script>
+    $('select').bsSelectDrop();
+</script>
+</body>
+</html>

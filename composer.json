@@ -1,0 +1,16 @@
+{
+  "name": "webcito/bs-select-drop",
+  "description": "this is only for demo",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "thomas",
+      "email": "t.kirsch@webcito.de"
+    }
+  ],
+  "require": {
+    "twbs/bootstrap": "5.2.0",
+    "components/jquery": "3.6.0"
+  }
+}

@@ -67,7 +67,13 @@
             $('<hr class="dropdown-divider mt-0">').appendTo($dropdownMenu);
         }
 
-        $select.find('option').each(function (index, option) {
+        let i = 0;
+        $select.find('optgroup, option').each(function (index, option) {
+            if ( $(this).is("optgroup")){
+                $(`<h6 class="dropdown-header">${$(this).attr('label')}</h6>`).appendTo($dropdownMenu);
+
+                return;
+            }
             let $option = $(option);
             let value = $option.prop('value');
             if (!value || value === "")
@@ -81,12 +87,19 @@
                 }
             }
 
+            let paddingLeft = 'ps-0';
+            if ($option.closest('optgroup').length){
+                paddingLeft = 'ps-3';
+            }
+
             $('<div>', {
+                class: paddingLeft,
                 html: `
-                <a class="dropdown-item ${selected}" data-index="${index}" href="#">
+                <a class="dropdown-item ${selected}" data-index="${i}" href="#">
                     ${$option.text()}
                 </a>`
             }).appendTo($dropdownMenu);
+            i++;
         });
 
         if (settings.menuAppendHtml !== null) {
@@ -155,6 +168,8 @@
                 } else {
                     $select.val(null);
                 }
+
+                console.log($select.val());
 
                 setDropdownTitle($select);
 
