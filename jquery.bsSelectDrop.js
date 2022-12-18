@@ -186,6 +186,7 @@
         return $dropdown;
     }
 
+
     function setDropdownTitle($select) {
         let settings = $select.data('options');
         const multiple = false !== $select.prop('multiple');

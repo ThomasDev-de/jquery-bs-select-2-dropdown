@@ -98,9 +98,8 @@ $('select').bsSelectDrop('refresh');
 #### destroy
 Deletes the dropdown and restores the original select.
 ```js
-$('select').bsSelectDrop('destroy');
+$('select').bsSelectDrop('destroy'); 
 ```
-
 ### Further ideas (ToDos)
 - [x] add optgroup to dropdown
 - [x] add subtexts to options and title of dropdown 
