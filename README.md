@@ -101,6 +101,6 @@ $('select').bsSelectDrop('destroy');
 ```
 
 ### Further ideas (ToDos)
-- add optgroup to dropdown
+[x] add optgroup to dropdown
 - add subtexts to options and title of dropdown
 - add trigger events on dropdown open and close
