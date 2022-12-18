@@ -88,6 +88,7 @@ $('select').bsSelectDrop('updateOptions', {
   ...
 });
 ```
+
 #### refresh
 Rebuild the dropdown. This is useful if the options are changed via Javascript.
 ```js
