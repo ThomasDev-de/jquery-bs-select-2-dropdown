@@ -92,11 +92,16 @@
                 paddingLeft = 'ps-3';
             }
 
+            let $subtext = settings.showSubtext && $option.data('subtext') ?
+                `<small class="text-muted mx-2">${$option.data('subtext')}`
+                :'';
+
             $('<div>', {
                 class: paddingLeft,
                 html: `
-                <a class="dropdown-item ${selected}" data-index="${i}" href="#">
-                    ${$option.text()}
+                <a class="dropdown-item ${selected} d-flex align-items-end" data-index="${i}" href="#">
+                    <span>${$option.text()}</span>
+                    ${$subtext}
                 </a>`
             }).appendTo($dropdownMenu);
             i++;
@@ -121,20 +126,20 @@
                 }
             })
             .on('keyup', '[type="search"]', function (e) {
-                let searchPattern = $.trim($(this).val());
+                let searchPattern = $(this).val().trim();
                 let searchElements = $dropdown.find('[data-index]');
                 if (searchPattern !== '') {
                     searchElements.each(function (index, value) {
 
-                        let currentName = $(value).text()
+                        let currentName = $(value).text().trim();
                         if (currentName.toUpperCase().indexOf(searchPattern.toUpperCase()) > -1) {
-                            $(value).show();
+                            $(value).removeClass('d-none');
                         } else {
-                            $(value).hide();
+                            $(value).addClass('d-none');
                         }
                     });
                 } else {
-                    searchElements.show();
+                    searchElements.removeClass('d-none');
                 }
             })
             .on('click', '[data-bs-dismiss="dropdown"]', function (e) {
@@ -193,17 +198,27 @@
         } else {
             if (Array.isArray(selectedValues)) {
                 if (selectedValues.length === 1) {
-                    title = $select.find(`option[value="${selectedValues[0]}"]`).text();
+                    let $option = $select.find(`option[value="${selectedValues[0]}"]`);
+                    let $subtext = settings.showSubtext && $option.data('subtext') ?
+                        `<small class="text-muted mx-2">${$option.data('subtext')}`
+                        :'';
+
+                    title = `<span>${$option.text()}</span><small class="text-muted ms-2">${$subtext}</small>`;
                 } else {
                     let length = $select.find('option').length;
                     title = `${selectedValues.length} / ${length} ausgewählt`;
                 }
             } else {
-                title = $select.find(`option[value="${selectedValues}"]`).text();
+                let $option = $select.find(`option[value="${selectedValues}"]`);
+                let $subtext = settings.showSubtext && $option.data('subtext') ?
+                    `<small class="text-muted ms-2">${$option.data('subtext')}`
+                    :'';
+
+                title = `<span>${$option.text()}</span><small class="text-muted mx-2">${$subtext}</small>`;
             }
         }
 
-        $titleElement.text(title);
+        $titleElement.html(title);
     }
 
     function val($select) {
@@ -248,7 +263,8 @@
         search: true,
         darkMenu: false,
         menuPreHtml: null,
-        menuAppendHtml: null
+        menuAppendHtml: null,
+        showSubtext: true
     };
 
     $.fn.bsSelectDrop = function (options, param) {

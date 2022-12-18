@@ -63,7 +63,8 @@ All selects with the attribute `[data-bs-toggle="select"]` are initialized autom
   search: true, // adds a search function to the menu
   darkMenu: false, // shows the menu in darkstyle
   menuPreHtml: null, // shows a text in the menu before the selection
-  menuAppendHtml: null // shows the text in the menu after the selection
+  menuAppendHtml: null, // shows the text in the menu after the selection
+  showSubtext: true // If this option is true, options have the data attribute data-subtext, the subtext will be displayed in the dropdown.
 }
 ```
 ### Methods
@@ -101,6 +102,6 @@ $('select').bsSelectDrop('destroy');
 ```
 
 ### Further ideas (ToDos)
-- add optgroup to dropdown
-- add subtexts to options and title of dropdown
-- add trigger events on dropdown open and close
+- [x] add optgroup to dropdown
+- [x] add subtexts to options and title of dropdown 
+- [ ] add trigger events on dropdown open and close
