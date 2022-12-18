@@ -51,8 +51,7 @@
             closeButton = `<button type="button" class="btn-close ${closeBtnClass} ms-2" data-bs-dismiss="dropdown" aria-label="Close"></button>`;
         }
 
-        $(`
-            <div class="d-flex px-2 pb-2 justify-content-end align-items-center border-bottom">
+        $(`<div class="d-flex px-2 pb-2 justify-content-end align-items-center border-bottom">
                 ${searchInput}
                 ${closeButton}
             </div>
