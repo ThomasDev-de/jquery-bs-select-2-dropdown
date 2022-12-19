@@ -200,7 +200,7 @@
             if (Array.isArray(selectedValues)) {
                 if (selectedValues.length === 1) {
                     let $option = $select.find(`option[value="${selectedValues[0]}"]`);
-                    let $subtext = settings.showSubtext && $option.data('subtext') ?
+                    let $subtext = $option.closest('optgroup').length && $option.data('subtext') ?
                         `<small class="text-muted mx-2">${$option.data('subtext')}`
                         :'';
 
@@ -211,7 +211,7 @@
                 }
             } else {
                 let $option = $select.find(`option[value="${selectedValues}"]`);
-                let $subtext = settings.showSubtext && $option.data('subtext') ?
+                let $subtext = $option.closest('optgroup').length && $option.data('subtext') ?
                     `<small class="text-muted ms-2">${$option.data('subtext')}`
                     :'';
 
