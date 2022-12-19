@@ -297,6 +297,7 @@
                     case 'val': {
                         $select.val(param);
                         val($select);
+                        refresh($select);
                     }
                         break;
                     case 'destroy': {
