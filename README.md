@@ -60,6 +60,7 @@ All selects with the attribute `[data-bs-toggle="select"]` are initialized autom
   dropStart: false, // shows the menu on the left
   dropEnd: false, // shows the menu on the right
   dropCenter: false, // shows the menu centered  
+  dropHeaderClass: 'secondary', // If option groups are present, the background class of the heading is set here.
   search: true, // adds a search function to the menu
   darkMenu: false, // shows the menu in darkstyle
   menuPreHtml: null, // shows a text in the menu before the selection
