@@ -70,7 +70,7 @@
 		let i = 0;
 		$select.find('optgroup, option').each(function (index, option) {
 			if ($(this).is("optgroup")) {
-				$(`<h6 class="dropdown-header">${$(this).attr('label')}</h6>`).appendTo($dropdownMenu);
+				$(`<h6 class="dropdown-header text-uppercase text-start my-0 w-100 rounded-0 py-1 bg-${settings.dropHeaderClass} text-bg-${settings.dropHeaderClass}">${$(this).attr('label')}</h6>`).appendTo($dropdownMenu);
 
 				return;
 			}
@@ -87,17 +87,11 @@
 				}
 			}
 
-			let paddingLeft = 'ps-0';
-			if ($option.closest('optgroup').length) {
-				paddingLeft = 'ps-3';
-			}
-
 			let $subtext = settings.showSubtext && $option.data('subtext') ?
 				`<small class="text-muted mx-2">${$option.data('subtext')}`
 				: '';
 
 			$('<div>', {
-				class: paddingLeft,
 				html: `
                 <a class="dropdown-item ${selected} d-flex align-items-end" data-index="${i}" href="#">
                     <span>${$option.text()}</span>
@@ -275,6 +269,7 @@
 		dropStart: false,
 		dropEnd: false,
 		dropCenter: false,
+		dropHeaderClass: 'secondary',
 		btnClass: 'btn btn-outline-secondary',
 		search: true,
 		darkMenu: false,
