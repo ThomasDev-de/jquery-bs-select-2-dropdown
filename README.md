@@ -64,7 +64,8 @@ All selects with the attribute `[data-bs-toggle="select"]` are initialized autom
   darkMenu: false, // shows the menu in darkstyle
   menuPreHtml: null, // shows a text in the menu before the selection
   menuAppendHtml: null, // shows the text in the menu after the selection
-  showSubtext: true // If this option is true, options have the data attribute data-subtext, the subtext will be displayed in the dropdown.
+  showSubtext: true, // If this option is true, options have the data attribute data-subtext, the subtext will be displayed in the dropdown.
+  showSelectionAsList: true // If it is a multiple selection, all selections should be listed below each other. If the value is false, it will show how much was selected.
 }
 ```
 ### Methods
