@@ -44,6 +44,23 @@ All selects with the attribute `[data-bs-toggle="select"]` are initialized autom
   ...
 </select>
 
+<!-- Or with option groups -->
+<select name="cities2" multiple>
+    <optgroup label="Germany">
+        <option value="1">Berlin</option>
+        <option value="2">Munich</option>
+    </optgroup>
+    <optgroup label="USA">
+        <option value="3">New York</option>
+        <option value="4">San Francisco</option>
+    </optgroup>
+    <optgroup label="Spain">
+        <option value="5">Barcelona</option>
+        <option value="6">Madrid</option>
+    </optgroup>
+    ...
+</select>
+
 <script>
   $('select').bsSelectDrop();
 </script>
