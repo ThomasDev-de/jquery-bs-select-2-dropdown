@@ -91,8 +91,8 @@
 				if (settings.showActionMenu) {
 					actionMenu = `
 						<div class="btn-group btn-group-sm mt-2 p-0">
-							<a href="#" class="btn btn-link p-0 js-select-select-all">Select All</a>
-							<a href="#" class="btn btn-link p-0 js-select-select-none">Deselect All</a>
+							<a href="#" class="btn btn-link p-0 js-select-select-all">${settings.selectAllText}</a>
+							<a href="#" class="btn btn-link p-0 js-select-select-none">${settings.deselectAllText}</a>
 						</div>
 					`;
 				}
