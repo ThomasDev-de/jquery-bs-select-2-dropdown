@@ -89,10 +89,11 @@
 			if (multiple) {
 				closeButton = `<button type="button" class="btn-close ${closeBtnClass} ms-2" data-bs-dismiss="dropdown" aria-label="Close"></button>`;
 				if (settings.showActionMenu) {
+					let actionBtnClass = settings.darkMenu ? 'light' : 'secondary';
 					actionMenu = `
-						<div class="btn-group btn-group-sm mt-2 p-0">
-							<a href="#" class="btn btn-link p-0 js-select-select-all">${settings.selectAllText}</a>
-							<a href="#" class="btn btn-link p-0 js-select-select-none">${settings.deselectAllText}</a>
+						<div class="btn-group btn-group-sm mt-2">
+							<a href="#" class="btn btn-outline-${actionBtnClass} p-0 js-select-select-all">${settings.selectAllText}</a>
+							<a href="#" class="btn btn-outline-${actionBtnClass} p-0 js-select-select-none">${settings.deselectAllText}</a>
 						</div>
 					`;
 				}
@@ -179,15 +180,17 @@
 					e.preventDefault();
 					$select.find('option').prop('selected', true);
 					refresh($select);
+					show($select);
 					$select.trigger('change.bs.select');
-					$select.bsSelectDrop('show');
+					$select.trigger('change');
 				})
 				.on('click', '.js-select-select-none', function (e) {
 					e.preventDefault();
 					$select.find('option').prop('selected', false);
 					refresh($select);
+					show($select);
 					$select.trigger('change.bs.select');
-					$select.bsSelectDrop('show');
+					$select.trigger('change');
 				})
 				.on('hidden.bs.dropdown', function () {
 					// empty search field if exists
