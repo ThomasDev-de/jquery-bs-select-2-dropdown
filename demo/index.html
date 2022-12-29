@@ -1,52 +1,74 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="../vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bootstrap demo</title>
+	<link href="../vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="container">
-<h1>Demo</h1>
 
-<div class="mb-3">
-    <label for="singleSelect">Simple selection</label>
-    <select name="countries" id="singleSelect">
-        <option value="Germany" data-subtext="Europe">Deutschland</option>
-        <option value="Poland" data-subtext="Europe">Polen</option>
-    </select>
-</div>
-<div class="mb-3">
-    <label for="multipleSelect">Multiple selection</label>
-    <select name="cities" multiple id="multipleSelect">
-        <option value="1">Berlin</option>
-        <option value="2">New York</option>
-        <option value="4">San Francisco</option>
-    </select>
-</div>
-<div class="mb-3">
-    <label for="optGroupSelect">OptionGroups selection</label>
-    <select name="cities2" multiple id="optGroupSelect">
-        <optgroup label="Germany">
-            <option value="1">Berlin</option>
-            <option value="2">Munich</option>
-        </optgroup>
-        <optgroup label="USA">
-            <option value="3">New York</option>
-            <option value="4">San Francisco</option>
-        </optgroup>
-        <optgroup label="Spain">
-            <option value="5">Barcelona</option>
-            <option value="6">Madrid</option>
-        </optgroup>
-        <option value="7" data-subtext="Landkreis Wolfen">Bitterfeld</option>
-    </select>
+<body class="">
+<nav class="navbar navbar-expand-lg bg-primary navbar-dark">
+
+	<div class="container">
+		<a class="navbar-brand" href="#">Demo</a>
+
+	</div>
+</nav>
+<div class="container my-5">
+	<div class="mb-3">
+		<label for="singleSelect">Simple selection</label>
+		<select name="countries" id="singleSelect">
+			<option value="Germany" data-subtext="Europe">Deutschland</option>
+			<option value="Poland" data-subtext="Europe">Polen</option>
+		</select>
+	</div>
+	<div class="mb-3">
+		<label for="multipleSelect">Multiple selection</label>
+		<select name="cities" multiple id="multipleSelect">
+			<option value="1">Berlin</option>
+			<option value="2">New York</option>
+			<option value="4">San Francisco</option>
+		</select>
+	</div>
+	<div class="mb-3">
+		<label for="optGroupSelect">OptionGroups selection</label>
+		<select name="cities2" multiple id="optGroupSelect">
+			<optgroup label="Germany">
+				<option value="1">Berlin</option>
+				<option value="2">Munich</option>
+			</optgroup>
+			<optgroup label="USA">
+				<option value="3">New York</option>
+				<option value="4">San Francisco</option>
+			</optgroup>
+			<optgroup label="Spain">
+				<option value="5" disabled selected>Barcelona</option>
+				<option value="6">Madrid</option>
+			</optgroup>
+			<option value="7" data-subtext="Landkreis Wolfen">Bitterfeld</option>
+		</select>
+	</div>
 </div>
 <script src="../vendor/components/jquery/jquery.min.js"></script>
 <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../jquery.bsSelectDrop.js"></script>
+<script src="../dist/jquery.bsSelectDrop.js"></script>
 <script>
-    $('select').bsSelectDrop();
+	(function($){
+		let classes = ['outline-primary', 'outline-dark','outline-danger', 'info', 'secondary'];
+		let selects = $('select');
+		selects.each(function(i, e){
+			let randomClass  = classes[Math.floor(Math.random() * classes.length)];
+			$(this).bsSelectDrop({
+				btnClass: 'btn btn-'+classes[i],
+				btnWidth: 'auto',
+				showSelectionAsList: false,
+				showActionMenu: true,
+				showSelectedText: (count, total) => {return `${count} von ${total} Städte ausgewählt`}
+			});
+		})
+	}(jQuery));
+
 </script>
 </body>
 </html>

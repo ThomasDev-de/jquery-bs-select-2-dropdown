@@ -9,7 +9,7 @@
       "email": "t.kirsch@webcito.de"
     }
   ],
-  "require": {
+  "require-dev": {
     "twbs/bootstrap": "5.2.0",
     "components/jquery": "3.6.0"
   }

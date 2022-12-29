@@ -10,10 +10,13 @@ Converts a select into a dropdown
     + [Usage](#usage)
     + [Options](#options)
     + [Methods](#methods)
+      - [show](#show)
+      - [hide](#hide)
       - [val](#val)
       - [updateOptions](#updateoptions)
       - [refresh](#refresh)
       - [destroy](#destroy)
+    + [Events](#events)
 
 ### Installation
 Include the script at the end of the body tag.
@@ -71,7 +74,7 @@ All selects with the attribute `[data-bs-toggle="select"]` are initialized autom
 ```js
 {
   btnWidth: 'fit-content', // the css width of the dropdown button
-  btnEmptyText: 'Bitte wählen..', // The text at no selection
+  btnEmptyText: 'Please select..', // The text at no selection
   btnClass: 'btn btn-outline-secondary', // The classes assigned to the dropdown button
   dropUp: false, // shows the menu above
   dropStart: false, // shows the menu on the left
@@ -83,7 +86,11 @@ All selects with the attribute `[data-bs-toggle="select"]` are initialized autom
   menuPreHtml: null, // shows a text in the menu before the selection
   menuAppendHtml: null, // shows the text in the menu after the selection
   showSubtext: true, // If this option is true, options have the data attribute data-subtext, the subtext will be displayed in the dropdown.
-  showSelectionAsList: true // If it is a multiple selection, all selections should be listed below each other. If the value is false, it will show how much was selected.
+  showActionMenu: true, // If it is a multiple selection and this option is true, two buttons are displayed above the selection for faster selection.
+  showSelectionAsList: true, // If it is a multiple selection, all selections should be listed below each other. If the value is false, it will show how much was selected.
+  showSelectedText: function(selectedItems, totalItems){}, // If it is a multiple selection and the selected elements are greater than 1, this function is called. This function is ignored if the showSelectionAsList option is true.
+  deselectAllText: 'Deselect All', // If showActionMenu is true, the language of the two buttons can be set here.
+  selectAllText: 'Select All', // If showActionMenu is true, the language of the two buttons can be set here.
 }
 ```
 ### Methods
@@ -91,6 +98,18 @@ Methods are called as follows
 
 ```js
 $('select').bsSelectDrop('method', param);
+```
+
+#### show
+Opens the dropdown
+```js
+$('select').bsSelectDrop('show');
+```
+
+#### hide
+Closes the dropdown
+```js
+$('select').bsSelectDrop('hide');
 ```
 
 #### val
@@ -119,7 +138,16 @@ Deletes the dropdown and restores the original select.
 ```js
 $('select').bsSelectDrop('destroy'); 
 ```
-### Further ideas (ToDos)
-- [x] add optgroup to dropdown
-- [x] add subtexts to options and title of dropdown 
-- [ ] add trigger events on dropdown open and close
+
+### Events
+
+| event type        | Description                                                                                          |
+|-------------------|------------------------------------------------------------------------------------------------------|
+| hide.bs.select    | Fires immediately when the hide instance method has been called.                                     |
+| hidden.bs.select  | 	Fired when the dropdown has finished being hidden from the user and CSS transitions have completed. |
+| show.bs.select    | Fires immediately when the show instance method is called.                                           |
+| shown.bs.select   | 	Fired when the dropdown has been made visible to the user and CSS transitions have completed.       |
+| refresh.bs.select | 	Fires when the `refresh` method has been invoked.                                                   |
+| change.bs.select  | 	Fires when the method `val` has been called.                                                        |
+| update.bs.select  | 	Fires when the method `updateOptions` was called.                                                   |
+| destroy.bs.select | 	Fires when the `destroy` method has been activated.                                                 |
