@@ -20,7 +20,7 @@
 		if (settings.dropStart) dropClasses.push('dropstart');
 		if (settings.dropCenter) dropClasses.push('dropdown-center');
 
-		const $dropdown = $('<div>', {
+		let $dropdown = $('<div>', {
 			class: 'dropdown js-bs-select-dropdown ' + dropClasses.join(' '),
 			html: `
                 <a class="${settings.btnClass} dropdown-toggle d-flex flex-nowrap align-items-center" ${closeOutside} href="#" role="button" data-bs-toggle="dropdown"
@@ -244,6 +244,8 @@
 			$dropdown.find(`.dropdown-item[data-index="${index}"]`).addClass('active');
 		});
 
+		$select.trigger('change');
+
 		setDropdownTitle($select);
 	}
 
@@ -262,27 +264,30 @@
 		init($select);
 	}
 
-	const DEFAULTS = {
-		btnWidth: 'fit-content',
-		btnEmptyText: 'Bitte wählen..',
-		dropUp: false,
-		dropStart: false,
-		dropEnd: false,
-		dropCenter: false,
-		dropHeaderClass: 'secondary',
-		btnClass: 'btn btn-outline-secondary',
-		search: true,
-		darkMenu: false,
-		menuPreHtml: null,
-		menuAppendHtml: null,
-		showSubtext: true,
-		showSelectionAsList: true
-	};
+
 
 	$.fn.bsSelectDrop = function (options, param) {
 
+		const DEFAULTS = {
+			btnWidth: 'fit-content',
+			btnEmptyText: 'Bitte wählen..',
+			dropUp: false,
+			dropStart: false,
+			dropEnd: false,
+			dropCenter: false,
+			dropHeaderClass: 'secondary',
+			btnClass: 'btn btn-outline-secondary',
+			search: true,
+			darkMenu: false,
+			menuPreHtml: null,
+			menuAppendHtml: null,
+			showSubtext: true,
+			showSelectionAsList: true
+		};
+
 		let callFunction = false;
 		let optionsSet = false;
+		
 		switch (typeof options) {
 			case 'string': {
 				callFunction = true;
