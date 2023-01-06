@@ -47,6 +47,11 @@
                 </a>`
 			}).insertAfter($select);
 
+			// fix overflow, when dropdown is inside bootstrap-table
+			if($dropdown.closest('.fixed-table-body:not(.overflow-visible)').length){
+				$dropdown.closest('.fixed-table-body').addClass('overflow-visible');
+			}
+
 			// add events
 			$dropdown
 				.on('hide.bs.dropdown', function () {
@@ -89,11 +94,10 @@
 			if (multiple) {
 				closeButton = `<button type="button" class="btn-close ${closeBtnClass} ms-2" data-bs-dismiss="dropdown" aria-label="Close"></button>`;
 				if (settings.showActionMenu) {
-					let actionBtnClass = settings.darkMenu ? 'light' : 'secondary';
 					actionMenu = `
-						<div class="btn-group btn-group-sm mt-2">
-							<a href="#" class="btn btn-outline-${actionBtnClass} p-0 js-select-select-all">${settings.selectAllText}</a>
-							<a href="#" class="btn btn-outline-${actionBtnClass} p-0 js-select-select-none">${settings.deselectAllText}</a>
+						<div class="btn-group btn-group-sm mt-2 p-0">
+							<a href="#" class="btn btn-link p-0 js-select-select-all">${settings.selectAllText}</a>
+							<a href="#" class="btn btn-link p-0 js-select-select-none">${settings.deselectAllText}</a>
 						</div>
 					`;
 				}
@@ -126,6 +130,7 @@
 					return;
 				}
 				let $option = $(option);
+				let classList = $option.get(0).className.trim();
 				let value = $option.prop('value');
 				let inOptGroup = $option.closest('optgroup').length !== 0;
 				let isDisabled = $option.prop('disabled');
@@ -155,6 +160,7 @@
 				}
 
 				$('<div>', {
+					class: classList,
 					html: `
                 <a class="dropdown-item ${selected} ${disabledClass} d-flex align-items-end" data-index="${i}" href="#">
                     <span class=" ${paddingLeftClass}">${$option.text()}</span>
@@ -180,17 +186,15 @@
 					e.preventDefault();
 					$select.find('option').prop('selected', true);
 					refresh($select);
-					show($select);
 					$select.trigger('change.bs.select');
-					$select.trigger('change');
+					$select.bsSelectDrop('show');
 				})
 				.on('click', '.js-select-select-none', function (e) {
 					e.preventDefault();
 					$select.find('option').prop('selected', false);
 					refresh($select);
-					show($select);
 					$select.trigger('change.bs.select');
-					$select.trigger('change');
+					$select.bsSelectDrop('show');
 				})
 				.on('hidden.bs.dropdown', function () {
 					// empty search field if exists
@@ -268,7 +272,7 @@
 			const $titleElement = $dropdown.find('.js-dropdown-header');
 			let selectedValues = $select.val();
 			let title;
-			if (!selectedValues || !selectedValues.length) {
+			if (!selectedValues || !selectedValues.length || selectedValues === "" || !$select.find('option:selected').length) {
 				title = settings.btnEmptyText;
 			} else {
 				if (Array.isArray(selectedValues)) {
@@ -300,11 +304,15 @@
 					}
 				} else {
 					let $option = $select.find(`option[value="${selectedValues}"]`);
-					let $subtext = $option.closest('optgroup').length && $option.data('subtext') ?
-						`<small class="text-muted ms-2">${$option.data('subtext')}`
-						: '';
+					if($option.hasClass('d-none')){
+						title = settings.btnEmptyText;
+					}else {
+						let $subtext = $option.closest('optgroup').length && $option.data('subtext') ?
+							`<small class="text-muted ms-2">${$option.data('subtext')}`
+							: '';
 
-					title = `<span>${$option.text()}</span><small class="text-muted mx-2">${$subtext}</small>`;
+						title = `<span>${$option.text()}</span><small class="text-muted mx-2">${$subtext}</small>`;
+					}
 				}
 			}
 
@@ -349,7 +357,7 @@
 
 			const DEFAULTS = {
 				btnWidth: 'fit-content',
-				btnEmptyText: 'Please select..',
+				btnEmptyText: 'Bitte wählen..',
 				dropUp: false,
 				dropStart: false,
 				dropEnd: false,
@@ -364,10 +372,10 @@
 				showActionMenu: true,
 				showSelectionAsList: true,
 				showSelectedText: function (count, total) {
-					return `${count}/${total} selected`;
+					return `${count}/${total} ausgewählt`;
 				},
-				deselectAllText: 'Deselect All',
-				selectAllText: 'Select All',
+				deselectAllText: 'Nichts',
+				selectAllText: 'Alles',
 			};
 
 			let callFunction = false;
