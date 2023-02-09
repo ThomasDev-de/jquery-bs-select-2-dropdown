@@ -292,8 +292,11 @@
 						let $subtext = $option.closest('optgroup').length && $option.data('subtext') ?
 							`<small class="text-muted mx-2">${$option.data('subtext')}`
 							: '';
+						let $icon = $option.data('icon') ?
+							`<i class="${$option.data('icon')}"></i> `
+							: '';
 
-						title = `<span>${$option.text()}</span><small class="text-muted ms-2">${$subtext}</small>`;
+						title = `<span>${$icon}${$option.text()}</span><small class="text-muted ms-2">${$subtext}</small>`;
 					} else {
 
 						if (!settings.showSelectionAsList) {
@@ -306,8 +309,11 @@
 								let $subtext = $option.closest('optgroup').length && $option.data('subtext') ?
 									$option.data('subtext')
 									: '';
+								let $icon = $option.data('icon') ?
+									`<i class="${$option.data('icon')}"></i> `
+									: '';
 
-								texts.push(`<div><span>${$option.text()}</span><small class="text-muted ms-2">${$subtext}</small></div>`);
+								texts.push(`<div><span>${$icon}${$option.text()}</span><small class="text-muted ms-2">${$subtext}</small></div>`);
 
 							})
 							title = `<div class="d-flex flex-column">${texts.join('')}</div>`;
@@ -321,8 +327,10 @@
 						let $subtext = $option.closest('optgroup').length && $option.data('subtext') ?
 							`<small class="text-muted ms-2">${$option.data('subtext')}`
 							: '';
-
-						title = `<span>${$option.text()}</span><small class="text-muted mx-2">${$subtext}</small>`;
+						let $icon = $option.data('icon') ?
+							`<i class="${$option.data('icon')}"></i> `
+							: '';
+						title = `<span>${$icon}${$option.text()}</span><small class="text-muted mx-2">${$subtext}</small>`;
 					}
 				}
 			}
