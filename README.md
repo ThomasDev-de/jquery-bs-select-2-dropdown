@@ -68,6 +68,12 @@ All selects with the attribute `[data-bs-toggle="select"]` are initialized autom
   $('select').bsSelectDrop();
 </script>
 ```
+### option[data-attributes]
+
+| data-attribute | example                                                          | description                                                          |
+|----------------|------------------------------------------------------------------|----------------------------------------------------------------------|
+| data-subtext   | `<option data-subtext="Germany" value="1">Berlin</option>`       | Adds a small additional text section                                 |
+| data-icon      | `<option data-icon="fa-solid fa-city" value="1">Berlin</option>` | Adds an icon in front of the option. (e.g. a class from FontAwesome) |
 
 
 ### Options

@@ -80,7 +80,7 @@
 			let darkMenu = settings.darkMenu ? 'dropdown-menu-dark' : '';
 
 			const $dropdownMenu = $('<div>', {
-				class: 'dropdown-menu mt-1 ' + darkMenu
+				class: 'dropdown-menu mt-1 py-0 ' + darkMenu
 			}).appendTo($dropdown);
 
 			let searchInput = '';
@@ -88,7 +88,7 @@
 			let closeButton = '';
 			let actionMenu = '';
 			if (settings.search) {
-				searchInput = `<input type="search" class="form-control form-control-sm me-auto" placeholder="Suchen..">`;
+				searchInput = `<input type="search" autocomplete="off" class="form-control form-control-sm me-auto" placeholder="Suchen..">`;
 			}
 
 			if (multiple) {
@@ -103,8 +103,12 @@
 				}
 			}
 
+			let toolbarClasses = '';
+			if (searchInput !== '' || closeButton !== '' || actionMenu !== ''){
+				toolbarClasses = 'px-2 pb-2 border-bottom';
+			}
 			$(`
-			<div class="d-flex flex-column px-2 pb-2 border-bottom">
+			<div class="d-flex flex-column ${toolbarClasses}">
 	            <div class="d-flex  justify-content-end align-items-center">
 	                ${searchInput}
 	                ${closeButton}
@@ -121,6 +125,8 @@
 				}).appendTo($dropdownMenu);
 				$('<hr class="dropdown-divider mt-0">').appendTo($dropdownMenu);
 			}
+
+			$dropdownMenu.find('[type="search"]').prop("autocomplete", "off")
 
 			let i = 0;
 			let inOGroup = false;
@@ -153,6 +159,10 @@
 					`<small class="text-muted mx-2">${$option.data('subtext')}`
 					: '';
 
+				let $icon = $option.data('icon') ?
+					`<i class="${$option.data('icon')}"></i> `
+					: '';
+
 				let paddingLeftClass = inOptGroup ? 'ps-3' : '';
 
 				if(inOGroup && !inOptGroup){
@@ -160,10 +170,11 @@
 				}
 
 				$('<div>', {
+					tabindex: i,
 					class: classList,
 					html: `
                 <a class="dropdown-item ${selected} ${disabledClass} d-flex align-items-end" data-index="${i}" href="#">
-                    <span class=" ${paddingLeftClass}">${$option.text()}</span>
+                    <span class=" ${paddingLeftClass}">${$icon}${$option.text()}</span>
                     ${$subtext}
                 </a>`
 				}).appendTo($dropdownMenu);
@@ -396,7 +407,7 @@
 				const $select = $(select);
 
 				if (optionsSet) {
-					$select.data('options', $.extend(true, DEFAULTS, options || {}))
+					$select.data('options', $.extend(true, DEFAULTS, $select.data(), options || {}))
 				}
 
 				init($select);
@@ -424,7 +435,7 @@
 						}
 							break;
 						case 'updateOptions': {
-							$select.data('options', $.extend(true, $select.data('options'), param || {}, DEFAULTS));
+							$select.data('options', $.extend(true,DEFAULTS, $select.data('options'), param || {}));
 							refresh($select);
 							$select.trigger('update.bs.select');
 						}
