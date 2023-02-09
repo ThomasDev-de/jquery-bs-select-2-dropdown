@@ -368,7 +368,7 @@
 
 			const DEFAULTS = {
 				btnWidth: 'fit-content',
-				btnEmptyText: 'Bitte wählen..',
+				btnEmptyText: 'Please select..',
 				dropUp: false,
 				dropStart: false,
 				dropEnd: false,
@@ -385,8 +385,8 @@
 				showSelectedText: function (count, total) {
 					return `${count}/${total} ausgewählt`;
 				},
-				deselectAllText: 'Nichts',
-				selectAllText: 'Alles',
+				deselectAllText: 'Deselect All',
+				selectAllText: 'Select All',
 			};
 
 			let callFunction = false;
