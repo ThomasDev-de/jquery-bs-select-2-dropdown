@@ -19,9 +19,14 @@ Converts a select into a dropdown
     + [Events](#events)
 
 ### Installation
-Include the script at the end of the body tag.
+Download and include the script at the end of the body tag.
 ```html
 <script src="jquery.bsSelectDrop.js" type="text/javascript">
+```
+
+or install with **composer**
+```shell
+composer require webcito/bs-select-drop:dev-main
 ```
 
 ### Requirements

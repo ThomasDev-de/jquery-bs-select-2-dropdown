@@ -1,6 +1,6 @@
 {
   "name": "webcito/bs-select-drop",
-  "description": "this is only for demo",
+  "description": "",
   "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [
@@ -10,7 +10,7 @@
     }
   ],
   "require-dev": {
-    "twbs/bootstrap": "5.2.0",
+    "twbs/bootstrap": ">=5.0.0",
     "components/jquery": "3.6.0"
   }
 }
