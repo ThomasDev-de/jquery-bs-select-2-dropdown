@@ -4,39 +4,45 @@ Converts a select into a dropdown
 
 ### table of contents
 
-- [jquery-bsSelectDrop](#jquery-bsselectdrop)
-    + [Installation](#installation)
-    + [Requirements](#requirements)
-    + [Usage](#usage)
-    + [Options](#options)
-    + [Methods](#methods)
-      - [show](#show)
-      - [hide](#hide)
-      - [val](#val)
-      - [updateOptions](#updateoptions)
-      - [refresh](#refresh)
-      - [destroy](#destroy)
-    + [Events](#events)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Options](#options)
+  - [Methods](#methods)
+  - [Events](#events)
 
+### Requirements
+- bootstrap >=5.0
+- jQuery 3.6
+- 
 ### Installation
 Download and include the script at the end of the body tag.
 ```html
 <script src="jquery.bsSelectDrop.js" type="text/javascript">
 ```
 
-or install with **composer**
+or install with **composer** and include the script at the end of the body tag.
 ```shell
 composer require webcito/bs-select-drop:dev-main
 ```
+```html
+<script src="/vendor/webcito/bs-select-drop/dist/jquery.bsSelectDrop.js" type="text/javascript">
+```
+### Set global defaults
 
-### Requirements
-- bootstrap 5.0+
-- jQuery 3.6
+```js
+// multiple options
+$.bsSelectDrop.setDefaults(options);
+// single option
+$.bsSelectDrop.setDefault(prop, val);
+// get default options
+$.bsSelectDrop.getDefaults();
+```
+
 
 ### Usage
 All selects with the attribute `[data-bs-toggle="select"]` are initialized automatically.
 
-**Manual call**
 ```html
 <!-- Simple selection -->
 <select name="countries">
@@ -82,28 +88,29 @@ All selects with the attribute `[data-bs-toggle="select"]` are initialized autom
 
 
 ### Options
-```js
-{
-  btnWidth: 'fit-content', // the css width of the dropdown button
-  btnEmptyText: 'Please select..', // The text at no selection
-  btnClass: 'btn btn-outline-secondary', // The classes assigned to the dropdown button
-  dropUp: false, // shows the menu above
-  dropStart: false, // shows the menu on the left
-  dropEnd: false, // shows the menu on the right
-  dropCenter: false, // shows the menu centered  
-  dropHeaderClass: 'secondary', // If option groups are present, the background class of the heading is set here.
-  search: true, // adds a search function to the menu
-  darkMenu: false, // shows the menu in darkstyle
-  menuPreHtml: null, // shows a text in the menu before the selection
-  menuAppendHtml: null, // shows the text in the menu after the selection
-  showSubtext: true, // If this option is true, options have the data attribute data-subtext, the subtext will be displayed in the dropdown.
-  showActionMenu: true, // If it is a multiple selection and this option is true, two buttons are displayed above the selection for faster selection.
-  showSelectionAsList: true, // If it is a multiple selection, all selections should be listed below each other. If the value is false, it will show how much was selected.
-  showSelectedText: function(selectedItems, totalItems){}, // If it is a multiple selection and the selected elements are greater than 1, this function is called. This function is ignored if the showSelectionAsList option is true.
-  deselectAllText: 'Deselect All', // If showActionMenu is true, the language of the two buttons can be set here.
-  selectAllText: 'Select All', // If showActionMenu is true, the language of the two buttons can be set here.
-}
-```
+
+| property            | type          | default                             | desc                                                                                                                                                                       |
+|---------------------|---------------|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| btnWidth            | `string`      | `fit-content`                       | *the css width of the dropdown button*                                                                                                                                     |
+| btnEmptyText        | `string`      | `Please select..`                   | *The text at no selection*                                                                                                                                                 |
+| btnClass            | `string`      | `btn btn-outline-secondary`         | *The classes assigned to the dropdown button*                                                                                                                              |
+| dropUp              | `bool`        | `false`                             | *shows the menu above*                                                                                                                                                     |
+| dropStart           | `bool`        | `false`                             | *shows the menu on the left*                                                                                                                                               |
+| dropEnd             | `bool`        | `false`                             | *shows the menu on the right*                                                                                                                                              |
+| dropCenter          | `bool`        | `false`                             | *shows the menu centered*                                                                                                                                                  |
+| dropHeaderClass     | `string`      | `secondary`                         | *If option groups are present, the background class of the heading is set here.*                                                                                           |
+| search              | `bool`        | `true`                              | *adds a search function to the menu*                                                                                                                                       |
+| darkMenu            | `bool`        | `false`                             | *shows the menu in darkstyle*                                                                                                                                              |
+| menuPreHtml         | `null/string` | `null`                              | *shows a text in the menu before the selection*                                                                                                                            |
+| menuAppendHtml      | `null/string` | `null`                              | *shows the text in the menu after the selection*                                                                                                                           |
+| showSubtext         | `bool`        | `true`                              | *If this option is true, options have the data attribute data-subtext, the subtext will be displayed in the dropdown.*                                                     |
+| showActionMenu      | `bool`        | `true`                              | *If it is a multiple selection and this option is true, two buttons are displayed above the selection for faster selection.*                                               |
+| showSelectionAsList | `bool`        | `true`                              | *If it is a multiple selection, all selections should be listed below each other. If the value is false, it will show how much was selected.*                              |
+| showSelectedText    | `function`    | `(selectedItems, totalItems) => {}` | *If it is a multiple selection and the selected elements are greater than 1, this function is called. This function is ignored if the showSelectionAsList option is true.* |
+| deselectAllText     | `string`      | `Deselect All`                      | *If showActionMenu is true, the language of the two buttons can be set here.*                                                                                              |
+| selectAllText       | `string`      | `Select All`                        | *If showActionMenu is true, the language of the two buttons can be set here.*                                                                                              |
+
+
 ### Methods
 Methods are called as follows
 

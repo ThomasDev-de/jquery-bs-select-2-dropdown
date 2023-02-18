@@ -1,5 +1,39 @@
 (function ($) {
 
+		$.bsSelectDrop = {
+			setDefaults: function (options) {
+				this.DEFAULTS = $.extend(true, this.DEFAULTS, options || {} );
+			},
+			setDefault: function (prop, value) {
+				this.DEFAULTS[prop] = value;
+			},
+			getDefaults: function () {
+				return this.DEFAULTS;
+			},
+			DEFAULTS:  {
+				btnWidth: 'fit-content',
+				btnEmptyText: 'Please select..',
+				dropUp: false,
+				dropStart: false,
+				dropEnd: false,
+				dropCenter: false,
+				dropHeaderClass: 'secondary',
+				btnClass: 'btn btn-outline-secondary',
+				search: true,
+				darkMenu: false,
+				menuPreHtml: null,
+				menuAppendHtml: null,
+				showSubtext: true,
+				showActionMenu: true,
+				showSelectionAsList: true,
+				showSelectedText: function (count, total) {
+					return `${count}/${total} ausgewählt`;
+				},
+				deselectAllText: 'Deselect All',
+				selectAllText: 'Select All',
+			}
+		};
+
 		function show($select) {
 			let $dropdown = $select.closest('.dropdown');
 			if ($dropdown.length) {
@@ -374,28 +408,28 @@
 
 		$.fn.bsSelectDrop = function (options, param) {
 
-			const DEFAULTS = {
-				btnWidth: 'fit-content',
-				btnEmptyText: 'Please select..',
-				dropUp: false,
-				dropStart: false,
-				dropEnd: false,
-				dropCenter: false,
-				dropHeaderClass: 'secondary',
-				btnClass: 'btn btn-outline-secondary',
-				search: true,
-				darkMenu: false,
-				menuPreHtml: null,
-				menuAppendHtml: null,
-				showSubtext: true,
-				showActionMenu: true,
-				showSelectionAsList: true,
-				showSelectedText: function (count, total) {
-					return `${count}/${total} ausgewählt`;
-				},
-				deselectAllText: 'Deselect All',
-				selectAllText: 'Select All',
-			};
+			// const DEFAULTS = {
+			// 	btnWidth: 'fit-content',
+			// 	btnEmptyText: 'Please select..',
+			// 	dropUp: false,
+			// 	dropStart: false,
+			// 	dropEnd: false,
+			// 	dropCenter: false,
+			// 	dropHeaderClass: 'secondary',
+			// 	btnClass: 'btn btn-outline-secondary',
+			// 	search: true,
+			// 	darkMenu: false,
+			// 	menuPreHtml: null,
+			// 	menuAppendHtml: null,
+			// 	showSubtext: true,
+			// 	showActionMenu: true,
+			// 	showSelectionAsList: true,
+			// 	showSelectedText: function (count, total) {
+			// 		return `${count}/${total} ausgewählt`;
+			// 	},
+			// 	deselectAllText: 'Deselect All',
+			// 	selectAllText: 'Select All',
+			// };
 
 			let callFunction = false;
 			let optionsSet = false;
@@ -415,7 +449,7 @@
 				const $select = $(select);
 
 				if (optionsSet) {
-					$select.data('options', $.extend(true, DEFAULTS, $select.data(), options || {}))
+					$select.data('options', $.extend(true, $.bsSelectDrop.DEFAULTS, $select.data(), options || {}))
 				}
 
 				init($select);
@@ -443,7 +477,7 @@
 						}
 							break;
 						case 'updateOptions': {
-							$select.data('options', $.extend(true,DEFAULTS, $select.data('options'), param || {}));
+							$select.data('options', $.extend(true,$.bsSelectDrop.DEFAULTS, $select.data('options'), param || {}));
 							refresh($select);
 							$select.trigger('update.bs.select');
 						}

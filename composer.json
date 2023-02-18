@@ -1,15 +1,16 @@
 {
   "name": "webcito/bs-select-drop",
-  "description": "",
+  "description": "Converts a select into a dropdown",
   "minimum-stability": "stable",
   "license": "proprietary",
+  "keywords": ["jquery", "bootstrap", "select", "dropdown"],
   "authors": [
     {
       "name": "thomas",
       "email": "t.kirsch@webcito.de"
     }
   ],
-  "require-dev": {
+  "require": {
     "twbs/bootstrap": ">=5.0.0",
     "components/jquery": "3.6.0"
   }

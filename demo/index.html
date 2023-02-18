@@ -55,17 +55,23 @@
 <script src="../dist/jquery.bsSelectDrop.js"></script>
 <script>
 	(function($){
+		// set global defaults
+		$.bsSelectDrop.setDefaults({
+			btnWidth: 'fit-content',
+			darkMenu: false,
+			showSelectionAsList: false,
+			showActionMenu: true,
+			showSelectedText: (count, total) => {return `${count} von ${total} Städte ausgewählt`},
+			deselectAllText: 'Auswahl aufheben',
+			selectAllText: 'Alles auswählen'
+		});
+
 		let classes = ['outline-primary', 'outline-dark','outline-danger', 'info', 'secondary'];
 		let selects = $('select');
 		selects.each(function(i, e){
 			let randomClass  = classes[Math.floor(Math.random() * classes.length)];
 			$(this).bsSelectDrop({
-				btnClass: 'btn btn-'+classes[i],
-				btnWidth: 'auto',
-				darkMenu: false,
-				showSelectionAsList: false,
-				showActionMenu: true,
-				showSelectedText: (count, total) => {return `${count} von ${total} Städte ausgewählt`}
+				btnClass: 'btn btn-'+classes[i]
 			});
 		})
 	}(jQuery));
