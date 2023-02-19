@@ -1,40 +1,49 @@
 (function ($) {
 
-		$.bsSelectDrop = {
-			setDefaults: function (options) {
-				this.DEFAULTS = $.extend(true, this.DEFAULTS, options || {} );
+	$.bsSelectDrop = {
+		setDefaults: function (options) {
+			this.DEFAULTS = $.extend(true, this.DEFAULTS, options || {} );
+		},
+		setDefault: function (prop, value) {
+			this.DEFAULTS[prop] = value;
+		},
+		getDefaults: function () {
+			return this.DEFAULTS;
+		},
+		DEFAULTS:  {
+			btnWidth: 'fit-content',
+			btnEmptyText: 'Please select..',
+			dropUp: false,
+			dropStart: false,
+			dropEnd: false,
+			dropCenter: false,
+			dropHeaderClass: 'text-bg-secondary',
+			btnClass: 'btn-outline-secondary',
+			search: true,
+			darkMenu: false,
+			menuPreHtml: null,
+			menuAppendHtml: null,
+			showSubtext: true,
+			showActionMenu: true,
+			actionMenuBtnSelectAllClass: 'btn-link',
+			actionMenuBtnDeSelectAllClass: 'btn-link',
+			showSelectionAsList: false,
+			showSelectedText: function (count, total) {
+				return `${count}/${total} ausgewählt`;
 			},
-			setDefault: function (prop, value) {
-				this.DEFAULTS[prop] = value;
-			},
-			getDefaults: function () {
-				return this.DEFAULTS;
-			},
-			DEFAULTS:  {
-				btnWidth: 'fit-content',
-				btnEmptyText: 'Please select..',
-				dropUp: false,
-				dropStart: false,
-				dropEnd: false,
-				dropCenter: false,
-				dropHeaderClass: 'secondary',
-				btnClass: 'btn btn-outline-secondary',
-				search: true,
-				darkMenu: false,
-				menuPreHtml: null,
-				menuAppendHtml: null,
-				showSubtext: true,
-				showActionMenu: true,
-				showSelectionAsList: true,
-				showSelectedText: function (count, total) {
-					return `${count}/${total} ausgewählt`;
-				},
-				deselectAllText: 'Deselect All',
-				selectAllText: 'Select All',
-			}
-		};
+			deselectAllText: 'Deselect All',
+			selectAllText: 'Select All',
+			dropDownListHeight: 300,
+			selectIconClass: "",
+			selectIcon: "",
+			debug: false,
+			dropDownItemClass: "",
+			searchPlaceholder:"Search.."
+		}
+	};
 
 		function show($select) {
+
 			let $dropdown = $select.closest('.dropdown');
 			if ($dropdown.length) {
 				$dropdown.dropdown('show');
@@ -42,6 +51,7 @@
 		}
 
 		function hide($select) {
+
 			let $dropdown = $select.closest('.dropdown');
 			if ($dropdown.length) {
 				$dropdown.dropdown('hide');
@@ -74,11 +84,11 @@
 			let $dropdown = $('<div>', {
 				class: 'dropdown js-bs-select-dropdown ' + dropClasses.join(' '),
 				html: `
-                <a class="${settings.btnClass} dropdown-toggle d-flex flex-nowrap align-items-center" ${closeOutside} href="#" role="button" data-bs-toggle="dropdown"
+				<div class="${settings.btnClass} form-select border d-flex flex-nowrap align-items-center" ${closeOutside} href="#" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false" style="width:${settings.btnWidth}">
                 <div class="js-dropdown-header flex-fill text-start">${settings.btnEmptyText}</div>
 
-                </a>`
+                </div>`
 			}).insertAfter($select);
 
 			// fix overflow, when dropdown is inside bootstrap-table
@@ -89,18 +99,22 @@
 			// add events
 			$dropdown
 				.on('hide.bs.dropdown', function () {
+					if (settings.debug) console.log("hide.bs.select");
 					$select.trigger('hide.bs.select');
 				})
 				.on('hidden.bs.dropdown', function () {
+					if (settings.debug) console.log("hidden.bs.select");
 					$select.trigger('hidden.bs.select');
 				})
 				.on('show.bs.dropdown', function () {
+					if (settings.debug) console.log("show.bs.select");
 					$select.trigger('show.bs.select');
 					if($('.js-bs-select-dropdown .dropdown-menu.show').length){
 						$('.js-bs-select-dropdown .dropdown-menu.show').closest('.dropdown').dropdown('hide');
 					}
 				})
 				.on('shown.bs.dropdown', function () {
+					if (settings.debug) console.log("shown.bs.select");
 					$select.trigger('shown.bs.select');
 					if ($select.closest('.dropdown').find('[type="search"]').length){
 						$select.closest('.dropdown').find('[type="search"]').focus()
@@ -122,7 +136,7 @@
 			let closeButton = '';
 			let actionMenu = '';
 			if (settings.search) {
-				searchInput = `<input type="search" autocomplete="off" class="form-control form-control-sm me-auto" placeholder="Suchen..">`;
+				searchInput = `<input type="search" autocomplete="off" class="form-control form-control-sm me-auto" placeholder="${settings.searchPlaceholder}">`;
 			}
 
 			if (multiple) {
@@ -130,8 +144,8 @@
 				if (settings.showActionMenu) {
 					actionMenu = `
 						<div class="btn-group btn-group-sm mt-2 p-0">
-							<a href="#" class="btn btn-link p-0 js-select-select-all">${settings.selectAllText}</a>
-							<a href="#" class="btn btn-link p-0 js-select-select-none">${settings.deselectAllText}</a>
+							<a href="#" class="btn ${settings.actionMenuBtnSelectAllClass} p-0 js-select-select-all">${settings.selectAllText}</a>
+							<a href="#" class="btn ${settings.actionMenuBtnDeSelectAllClass} p-0 js-select-select-none">${settings.deselectAllText}</a>
 						</div>
 					`;
 				}
@@ -139,7 +153,7 @@
 
 			let toolbarClasses = '';
 			if (searchInput !== '' || closeButton !== '' || actionMenu !== ''){
-				toolbarClasses = 'px-2 pb-2 border-bottom';
+				toolbarClasses = 'px-2 pb-2 pt-2 border-bottom';
 			}
 			$(`
 			<div class="d-flex flex-column ${toolbarClasses}">
@@ -159,14 +173,14 @@
 				}).appendTo($dropdownMenu);
 				$('<hr class="dropdown-divider mt-0">').appendTo($dropdownMenu);
 			}
-
+			const $dropdownMenuInner = $(`<div style="overflow-y:scroll;height:${settings.dropDownListHeight}px;"></div>`).appendTo($dropdownMenu);
 			$dropdownMenu.find('[type="search"]').prop("autocomplete", "off")
 
 			let i = 0;
 			let inOGroup = false;
 			$select.find('optgroup, option').each(function (index, option) {
 				if ($(this).is("optgroup")) {
-					$(`<h6 class="dropdown-header text-uppercase text-start my-0 w-100 rounded-0 py-1 bg-${settings.dropHeaderClass} text-bg-${settings.dropHeaderClass}">${$(this).attr('label')}</h6>`).appendTo($dropdownMenu);
+					$(`<h6 class="dropdown-header text-uppercase text-start my-0 w-100 rounded-0 py-1 ${settings.dropHeaderClass}">${$(this).attr('label')}</h6>`).appendTo($dropdownMenuInner);
 					return;
 				}
 				let $option = $(option);
@@ -180,17 +194,19 @@
 					return;
 
 				let selected = "";
-
+				let selectedIcon = "d-none";
 				if (value !== false) {
 					if (multiple) {
 						selected = $.inArray(value, selectedValue) > -1 ? 'active' : '';
+						selectedIcon = $.inArray(value, selectedValue) > -1 ? '' : 'd-none';
 					} else {
-						selected = selectedValue === value ? 'active' : '';
+						selected = selectedValue === value ? 'active' : '';					
+						selectedIcon = selectedValue === value ? 'd-none' : 'd-none';
 					}
 				}
 
 				let $subtext = settings.showSubtext && $option.data('subtext') ?
-					`<small class="text-muted mx-2">${$option.data('subtext')}`
+					`<small class="text-muted mx-2">${$option.data('subtext')}</small>`
 					: '';
 
 				let $icon = $option.data('icon') ?
@@ -200,30 +216,31 @@
 				let paddingLeftClass = inOptGroup ? 'ps-3' : '';
 
 				if(inOGroup && !inOptGroup){
-					$(`<hr class="dropdown-divider">`).appendTo($dropdownMenu);
+					$(`<hr class="dropdown-divider">`).appendTo($dropdownMenuInner);
 				}
 
 				$('<div>', {
 					tabindex: i,
 					class: classList,
 					html: `
-                <a class="dropdown-item ${selected} ${disabledClass} d-flex align-items-end" data-index="${i}" href="#">
-                    <span class=" ${paddingLeftClass}">${$icon}${$option.text()}</span>
-                    ${$subtext}
-                </a>`
-				}).appendTo($dropdownMenu);
+                <div class="dropdown-item ${selected} ${disabledClass}  d-flex justify-content-between ${settings.dropDownItemClass} " data-index="${i}" href="#" style="cursor: pointer;">
+                     <div class="${paddingLeftClass}">${$icon}${$option.text()}</div>
+					 ${$subtext}
+					 <div class="${selectedIcon} dropdown-item-select-icon ms-1 float-end ${settings.selectIconClass}">${settings.selectIcon}</div>
+                </div>`
+				}).appendTo($dropdownMenuInner);
 				inOGroup = inOptGroup;
 				i++;
 			});
 
 			if (settings.menuAppendHtml !== null) {
-				$('<hr class="dropdown-divider">').appendTo($dropdownMenu);
+				$('<hr class="dropdown-divider">').appendTo($dropdownMenuInner);
 
 				$('<div>', {
 					html: settings.menuAppendHtml,
 					class: 'text-muted fs-6',
 					css: {padding: '4px 16px'}
-				}).appendTo($dropdownMenu);
+				}).appendTo($dropdownMenuInner);
 			}
 
 			$dropdown
@@ -277,6 +294,8 @@
 						$dropdown.find('.dropdown-item.active').removeClass('active');
 
 					$(e.currentTarget).toggleClass('active');
+					if (multiple)
+						$(e.currentTarget).find('.dropdown-item-select-icon').toggleClass('d-none');
 
 					let values = [];
 
@@ -297,7 +316,7 @@
 						$select.val(null);
 					}
 
-					console.log($select.val());
+					if (settings.debug) console.log($select.val());
 
 					setDropdownTitle($select);
 
@@ -317,6 +336,7 @@
 			const $titleElement = $dropdown.find('.js-dropdown-header');
 			let selectedValues = $select.val();
 			let title;
+			let tooltip="";
 			if (!selectedValues || !selectedValues.length || selectedValues === "" || !$select.find('option:selected').length) {
 				title = settings.btnEmptyText;
 			} else {
@@ -331,13 +351,21 @@
 							: '';
 
 						title = `<span>${$icon}${$option.text()}</span><small class="text-muted ms-2">${$subtext}</small>`;
+						tooltip = $option.text();
 					} else {
 
 						if (!settings.showSelectionAsList) {
 							let length = $select.find('option').length;
 							title = settings.showSelectedText(selectedValues.length, length);
+							let tooltips = [];
+							selectedValues.forEach(val => {
+								let $option = $select.find(`option[value="${val}"]`);
+								tooltips.push($option.text());
+							})
+							tooltip += tooltips.join(',');
 						} else {
 							let texts = [];
+							let tooltips = [];
 							selectedValues.forEach(val => {
 								let $option = $select.find(`option[value="${val}"]`);
 								let $subtext = $option.closest('optgroup').length && $option.data('subtext') ?
@@ -348,9 +376,10 @@
 									: '';
 
 								texts.push(`<div><span>${$icon}${$option.text()}</span><small class="text-muted ms-2">${$subtext}</small></div>`);
-
+								tooltips.push($option.text());
 							})
 							title = `<div class="d-flex flex-column">${texts.join('')}</div>`;
+							tooltip += tooltips.join(',');
 						}
 					}
 				} else {
@@ -365,11 +394,13 @@
 							`<i class="${$option.data('icon')}"></i> `
 							: '';
 						title = `<span>${$icon}${$option.text()}</span><small class="text-muted mx-2">${$subtext}</small>`;
+						tooltip = $option.text();
 					}
 				}
 			}
 
 			$titleElement.html(title);
+			$titleElement.attr('title', tooltip);
 		}
 
 		function val($select) {

@@ -109,6 +109,12 @@ All selects with the attribute `[data-bs-toggle="select"]` are initialized autom
 | showSelectedText    | `function`    | `(selectedItems, totalItems) => {}` | *If it is a multiple selection and the selected elements are greater than 1, this function is called. This function is ignored if the showSelectionAsList option is true.* |
 | deselectAllText     | `string`      | `Deselect All`                      | *If showActionMenu is true, the language of the two buttons can be set here.*                                                                                              |
 | selectAllText       | `string`      | `Select All`                        | *If showActionMenu is true, the language of the two buttons can be set here.*                                                                                              |
+| dropDownListHeight  | `number`      | `300`                               | *Height of the dropdown list.*                                                                                                                                             |
+| selectIconClass     | `string`      | ``                                  | *Class used to style the select icon.*                                                                                                                                     |
+| selectIcon          | `string`      | ``                                  | *Icon used for selection (i.e <i class='fa-solid fa-check'></i> )*                                                                                                         |
+| debug               | `bool`        | `false`                             | *If true then outputs debug messages to the console.*                                                                                                                      |
+| dropDownItemClass   | `string`      | ``                                  | *Class used to stype the drop-down item.  Add and .active style to override the Bootstrap active styling*                                                                  |
+| searchPlaceholder   | `string`      | `Search..`                          | "Placeholder for search input box*                                                                                                                                         |
 
 
 ### Methods
