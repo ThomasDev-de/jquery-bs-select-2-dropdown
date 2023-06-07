@@ -29,7 +29,7 @@
 			actionMenuBtnDeSelectAllClass: 'btn-link',
 			showSelectionAsList: false,
 			showSelectedText: function (count, total) {
-				return `${count}/${total} ausgewählt`;
+				return `${count}/${total} selected`;
 			},
 			deselectAllText: 'Deselect All',
 			selectAllText: 'Select All',
