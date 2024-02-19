@@ -1,5 +1,5 @@
 > [!IMPORTANT]
-> This package has been overhauled and has been revised here https://github.com/ThomasDev-de/bs-selectel
+> This package has been overhauled and has been revised here https://github.com/ThomasDev-de/bs-select
 
 # jquery-bsSelectDrop
 
