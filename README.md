@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This package has been overhauled and has been revised here https://github.com/ThomasDev-de/bs-selectel
+
 # jquery-bsSelectDrop
 
 Converts a select into a dropdown
